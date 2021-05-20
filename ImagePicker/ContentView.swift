@@ -14,6 +14,8 @@ struct ContentView: View {
     
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
+    @State var image: UIImage?
+    
     var body: some View {
         VStack {
             Button(action: {
@@ -42,6 +44,9 @@ struct ContentView: View {
                     // Button3 - > 취소 버튼
                     .cancel(Text("취소"))
                 ])
+            }.sheet(isPresented: $showImagePicker) {
+                // ImagePicker.swift 파일로 따로 만들어놓은 이미지피커
+                ImagePicker(image: self.$image, sourceType: self.sourceType)
             }
             
             Spacer()
